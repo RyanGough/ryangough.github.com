@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>D3 Presentation</title>
+	<script src="d3.v3.min.js"></script>
+	<link rel="stylesheet" href="bootstrap.min.css" />
+	<link rel="stylesheet" href="d3pres.css" />
+</head>
+<body> 
+	<div id="pageContent">
+		<ul class="pager">
+			<li><a href="./page2.html">Previous</a></li>
+			<li><a href="./page4.html">Next</a></li>
+		</ul>
+		<h4 class="text-center">Dynamic Properties</h4>
+		<button class="btn btn-default" id="tryIt" onclick="play()">Try it</button>
+	</div>
+	<div id="visualisation"></div>
+	<pre>
+		...
+
+		svg.selectAll("circle")
+			.data(data)
+			.enter()
+			.append("circle")
+			.attr("r", 10)
+			.attr("cx", function(x){return x.weight / 3})
+			.attr("cy", function(x){return x.height * 2})
+			.style("fill", function(x){return x.colour})		
+	</pre>
+	<script>
+		function play(){
+			var data = [
+				{name: "one", height: 34, weight: 870, colour: "red"},
+				{name: "two", height: 12, weight: 650, colour: "green"},
+				{name: "three", height: 25, weight: 330, colour: "blue"},
+			];
+
+			var svg = d3.select("#visualisation")
+				.append("svg")
+				.attr("width", 400)
+				.attr("height", 200);
+
+			svg.selectAll("circle")
+				.data(data)
+				.enter()
+				.append("circle")
+				.attr("r", 10)
+				.attr("cx", function(x){return x.weight / 3})
+				.attr("cy", function(x){return x.height * 2})
+				.style("fill", function(x){return x.colour});
+
+			document.getElementById("tryIt").onclick = null;
+		}
+	</script>
+</body>
+</html>

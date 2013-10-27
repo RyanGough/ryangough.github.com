@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>D3 Presentation</title>
+	<script src="d3.v3.min.js"></script>
+	<link rel="stylesheet" href="bootstrap.min.css" />
+	<link rel="stylesheet" href="d3pres.css" />
+</head>
+<body> 
+	<div id="pageContent">
+		<ul class="pager">
+			<li><a href="./page1.html">Previous</a></li>
+			<li><a href="./page3.html">Next</a></li>
+		</ul>
+		<h4 class="text-center">Binding Data</h4>
+		<button class="btn btn-default" id="tryIt" onclick="play()">Try it</button>
+	</div>
+	<div id="visualisation"></div>
+	<pre>
+		...
+
+		var data = [
+			{name: "one", height: 34, weight: 870, colour: "red"},
+			{name: "two", height: 12, weight: 650, colour: "green"},
+			{name: "three", height: 25, weight: 330, colour: "blue"},
+		];
+
+
+		svg.selectAll("circle")
+			.data(data)
+			.enter()
+			.append("circle")
+			.attr("r", 10)
+			.attr("cx", 100)
+			.attr("cy", 100)		
+	</pre>
+	<div class="text-center">
+		<p>More from Mike Bostock:</p>
+		<a href="http://bost.ocks.org/mike/join/">Thinking with joins</a>
+		<a href="http://bost.ocks.org/mike/selection/">How selections work</a>
+	</div>
+	<script>
+		function play(){
+
+		var svg = d3.select("#visualisation")
+			.append("svg")
+			.attr("width", 400)
+			.attr("height", 200);
+
+		var data = [
+			{name: "one", height: 34, weight: 870, colour: "red"},
+			{name: "two", height: 12, weight: 650, colour: "green"},
+			{name: "three", height: 25, weight: 330, colour: "blue"},
+		];
+
+		svg.selectAll("circle")
+			.data(data)
+			.enter()
+			.append("circle")
+			.attr("r", 10)
+			.attr("cx", 100)
+			.attr("cy", 100)
+
+		document.getElementById("tryIt").onclick = null;
+		}
+	</script>
+</body>
+</html>

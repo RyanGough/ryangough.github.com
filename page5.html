@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>D3 Presentation</title>
+	<script src="d3.v3.min.js"></script>
+	<link rel="stylesheet" href="bootstrap.min.css" />
+	<link rel="stylesheet" href="d3pres.css" />
+</head>
+<body> 
+	<div id="pageContent">
+		<ul class="pager">
+			<li><a href="./page4.html">Previous</a></li>
+			<li><a href="./page6.html">Next</a></li>
+		</ul>
+		<h4 class="text-center">Axes</h4>
+		<button class="btn btn-default" id="tryIt" onclick="play()">Try it</button>
+	</div>
+	<div id="visualisation"></div>
+	<pre>
+		...
+
+		var xAxis = d3.svg.axis()
+			.scale(xScale)
+			.orient("bottom")
+
+		var yAxis = d3.svg.axis()
+			.orient("left")
+			.scale(yScale);
+
+		svg.append("g")
+			.attr("transform", "translate(0,150)")
+			.attr("class", "axis")
+			.call(xAxis)
+
+		svg.append("g")
+			.attr("transform", "translate(25,0)")
+			.attr("class", "axis")
+			.call(yAxis)
+	</pre>
+	<script>
+		function play(){
+
+			var svg = d3.select("#visualisation")
+				.append("svg")
+				.attr("width", 400)
+				.attr("height", 200);
+
+			var data = [
+				{name: "one", height: 34, weight: 870, colour: "red"},
+				{name: "two", height: 12, weight: 650, colour: "green"},
+				{name: "three", height: 25, weight: 330, colour: "blue"},
+			];
+
+			var xScale = d3.scale.linear()
+							.domain([200,1000])
+							.range([25,375]);
+
+			var yScale = d3.scale.linear()
+							.domain([0, d3.max(data, function(x){return x.height})])
+							.range([150,25]);
+
+			svg.selectAll("circle")
+				.data(data)
+				.enter()
+				.append("circle")
+				.attr("r", 10)
+				.attr("cx", function(x){return xScale(x.weight)})
+				.attr("cy", function(x){return yScale(x.height)})
+				.style("fill", function(x){return x.colour})
+
+			var xAxis = d3.svg.axis()
+							.scale(xScale)
+							.orient("bottom")
+
+			var yAxis = d3.svg.axis()
+							.orient("left")
+							.scale(yScale);
+
+			svg.append("g")
+				.attr("transform", "translate(0,150)")
+				.attr("class", "axis")
+				.call(xAxis)
+
+			svg.append("g")
+				.attr("transform", "translate(25,0)")
+				.attr("class", "axis")
+				.call(yAxis)
+
+			document.getElementById("tryIt").onclick = null;
+		}
+	</script>
+</body>
+</html>

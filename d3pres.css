@@ -1,0 +1,20 @@
+svg {
+	border: 1px solid;
+	display: block;
+	margin: 0 auto;
+}
+
+#visualisation {
+	padding: 10px;
+}
+
+.axis path {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 1px;
+}
+
+#tryIt {
+	display: block;
+	margin: 0 auto;
+}
