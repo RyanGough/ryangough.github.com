@@ -10,41 +10,30 @@
 <body> 
 	<div id="pageContent">
 		<ul class="pager">
-			<li><a href="./page8.html">Previous</a></li>
-			<li><a href="./page10.html">Next</a></li>
+			<li><a href="./page9.html">Previous</a></li>
+			<li class="disabled"><a href="#">Next</a></li>
 		</ul>
-		<h4 class="text-center">Transitions</h4>
+		<h4 class="text-center">Interaction</h4>
 		<button class="btn btn-default" id="tryIt" onclick="play()">Try it</button>
 	</div>
 	<div id="visualisation"></div>
 	<pre>
 		...
 
+		join.enter()
+			.append("circle")
+			.style("fill", function(x){return x.colour})
+			.attr("r", 10)
+			.attr("cx", function(x){return xScale(x.weight)})
+			.attr("cy", function(x){return yScale(x.height)})
+			.on("click", onClick)
 
-		function draw(drawData) {
-			var join = svg.selectAll("circle")
-				.data(drawData, function(x){return x.name})
+		...
 
-			join.enter()
-				.append("circle")
-				.style("fill", function(x){return x.colour})
-				.attr("r", 10)
-				.attr("cx", function(x){return xScale(x.weight)})
-				.attr("cy", function(x){return yScale(x.height)})
-
-			join
-				.transition()
-				.duration(1000)
-				.attr("cx", function(x){return xScale(x.weight)})
-				.attr("cy", function(x){return yScale(x.height)})
-
-			join.exit()
-				.transition()
-				.delay(1000)
-				.duration(500)
-				.attr("r", 0)
-				.remove()
-		}
+		function onClick(datum, index){
+			data[index].height = 1000;
+			draw(data);
+		}	
 
 		...
 	</pre>
@@ -99,6 +88,7 @@
 					.attr("r", 10)
 					.attr("cx", function(x){return xScale(x.weight)})
 					.attr("cy", function(x){return yScale(x.height)})
+					.on("click", onClick)
 
 				join
 					.transition()
@@ -116,15 +106,10 @@
 
 			draw(data);
 			
-			var data2 = [
-				{name: "one", height: 16, weight: 321, colour: "red"},
-				{name: "three", height: 25, weight: 330, colour: "blue"},
-				{name: "four", height: 21, weight: 777, colour: "purple"},
-			];
-
-			alert("wait for it...")
-
-			draw(data2);
+			function onClick(datum, index){
+				data[index].height = 1000;
+				draw(data);
+			}
 
 			document.getElementById("tryIt").onclick = null;
 		}
