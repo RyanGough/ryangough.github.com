@@ -1,11 +1,12 @@
 svg {
 	border: 1px solid;
-	display: block;
-	margin: 0 auto;
 }
 
 #visualisation {
 	padding: 10px;
+	width: 410px;
+	height: 210px;
+	margin: 10px auto;
 }
 
 .axis path {
