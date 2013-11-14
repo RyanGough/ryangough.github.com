@@ -68,7 +68,7 @@
       .nodes(nodes)
       .links([])
       .charge(function(node){return node.selected ? repulse * 5 : repulse})
-      .size([width, height])
+      .size([800, 600])
 
     var node = svg.selectAll(".node")
       .data(nodes)
