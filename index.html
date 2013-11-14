@@ -59,16 +59,26 @@
       return node.selected ? nodeRadius : nodeRadius;
     }
 
-  var svg = d3.select("#balls").append("svg")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("class", "floatOverlay")
+    function viewport() {
+      var e = window
+      , a = 'inner';
+      if ( !( 'innerWidth' in window ) ) {
+        a = 'client';
+        e = document.documentElement || document.body;
+      }
+      return { width : e[ a+'Width' ] , height : e[ a+'Height' ] }
+    }
+
+    var svg = d3.select("#balls").append("svg")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("class", "floatOverlay")
 
     var force = d3.layout.force()
       .nodes(nodes)
       .links([])
       .charge(function(node){return node.selected ? repulse * 5 : repulse})
-      .size([800, 600])
+      .size([viewport().width, viewport().height])
 
     var node = svg.selectAll(".node")
       .data(nodes)
