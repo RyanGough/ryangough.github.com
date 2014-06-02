@@ -3,109 +3,47 @@
 <head>
     <meta charset="utf-8">
     <title>Ryan W Gough</title>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300' rel='stylesheet' type='text/css'>
-    <style>
-      body {
-        font-family: 'Yanone Kaffeesatz', sans-serif;
-      }
-      #preview{
-        font-size: 5em;
-        font-weight:300;
-      }
-      .floatOverlay{
-       position:absolute;
-          top:0px;
-          left:0px;
-      }
-    </style>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='./styles/ryan.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <div id="header" class="floatOverlay">
-    <p id="preview"></p>
+  <div class="banner">
+    <div class="title">
+      <h1>Ryan W Gough</h1>
+      <div class="quicklink">
+        <a href="https://twitter.com/ryanwgough" target="_blank">
+          <img src="./images/Twitter-Bird-32px.png"/>
+        </a>
+      </div>
+      <div class="quicklink">
+        <a href="https://github.com/RyanGough" target="_blank">
+          <img src="./images/GitHub-Mark-32px.png"/>
+        </a>
+      </div>
+    </div>
   </div>
-  <div id="balls">
+  <div class="content">
+    <div class="blurb">
+      <p>I'm a software developer from Manchester, UK. Here are links to a few bits and bobs that I've played with in my spare time.</p>
+    </div>  
+    <div class="content-row">
+      <div class="content-item experiment">
+        <a href="http://ryangough.github.io/D3StepByStep/index.html" target="_blank">D3 Tutorial</a>
+        <div class="content-blurb">Some example pages showing D3.js in action. Build up a scatterplot with interaction and animation.</div>
+      </div>
+      <div class="content-item experiment">
+        <a href="http://www.rotelist.com/" target="_blank">RoteList</a>
+        <div class="content-blurb">My first real attempt at using Node.js. It's ostensibly a site to help with memorising stuff.</div>
+      </div>
+      <div class="content-item experiment">
+        <a href="http://ryangough.github.io/gameoflife/index.html" target="_blank">Game Of Life</a>
+        <div class="content-blurb">JavaScript implementation of Conway's Game Of Life.</div>
+      </div>
+      <div class="content-item experiment">
+        <a href="http://ryangough.github.io/radar/radar.html" target="_blank">Radar Visualisation</a>
+        <div class="content-blurb">A radar visualisation, made with D3.</div>
+      </div>
+    </div>
   </div>
-  <script>
-    var repulse = -275,
-    nodeRadius = 30,
-    nodes = [
-      {name: "Twitter", link: "https://twitter.com/ryanwgough", color: "blue", selected: false, blurb: "Tweets, by me."},
-      {name: "TechRadarD3", link: "http://ryangough.github.io/radar/radar.html", color: "gray", selected: false, blurb: "A radar visualisation, made with D3."},
-      {name: "GitHub", link: "https://github.com/RyanGough", color: "red", selected: false, blurb: "My GitHub page. Mostly throwaway stuff from hackdays and the like, rather than big, worthy projects. I hope to find time to do more of the latter! :)"},
-      {name: "RoteList", link: "http://www.rotelist.com/", color: "yellow", selected: false, blurb: "My first real attempt at using Node.js. It's ostensibly a site to help with memorising stuff."},
-      {name: "GameOfLife", link: "http://ryangough.github.io/gameoflife/index.html", color: "green", selected: false, blurb: "An javascript implementation of Conway's Game Of Life"},
-      {name: "D3Tutorial", link: "http://ryangough.github.io/D3StepByStep/index.html", color: "purple", selected: false, blurb: "Some example pages I created for a talk at MancJS showing D3.js in action. Build up a scatterplot with interaction and animation."},     
-    ];
-
-    function preview(node){
-      node.selected = true;
-      d3.select("#preview").text(node.blurb);
-      d3.select("#" + node.name).attr("r", nodeRadius * 1.5);
-      force.start();
-    }
-
-    function endPreview(node){
-      d3.select("#preview").text("");
-      d3.select("#" + node.name).attr("r", nodeRadius);
-      node.selected = false;      
-    }
-
-    function clicked(node){
-      if (d3.event.defaultPrevented) return; // ignore drag
-      window.location.href = node.link;
-    }
-
-    function calcRadius(node){
-      return node.selected ? nodeRadius : nodeRadius;
-    }
-
-    function viewport() {
-      var e = window
-      , a = 'inner';
-      if ( !( 'innerWidth' in window ) ) {
-        a = 'client';
-        e = document.documentElement || document.body;
-      }
-      return { width : e[ a+'Width' ] , height : e[ a+'Height' ] }
-    }
-
-    var svg = d3.select("#balls").append("svg")
-      .attr("width", "100%")
-      .attr("height", "100%")
-      .attr("class", "floatOverlay")
-
-    var force = d3.layout.force()
-      .nodes(nodes)
-      .links([])
-      .charge(function(node){return node.selected ? repulse * 5 : repulse})
-      .size([viewport().width, viewport().height])
-
-    var node = svg.selectAll(".node")
-      .data(nodes)
-      .enter().append("circle")
-      .attr("class", "node")
-      .attr("cx", function(d) { return d.x; })
-      .attr("cy", function(d) { return d.y; })
-      .attr("r", calcRadius)
-      .style("opacity", 0.55)
-      .attr("id", function(d){return d.name;})
-      .on("mouseover", function(d) { preview(d); })
-      .on("click", function(d){ clicked(d); })
-      .on("mouseout", function(d){ endPreview(d); })
-      .on("mouseup", function(d){ endPreview(d); })
-      .style("fill", function(d) { return d.color; })
-      .style("stroke", function(d) { return d3.rgb(d.color).darker(1); })
-      .style("stroke-width", 2)
-      .style("cursor", "pointer")
-      .call(force.drag);
-
-    force.on("tick", function() {
-      node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-    });
-
-    force.start();
-
-  </script>
 </body>
 </html>

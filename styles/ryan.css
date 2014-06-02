@@ -1,0 +1,40 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	margin: 20px 0px 0px 20px;
+}
+.title {
+/*	width: 350px;
+	margin: auto;*/
+}
+.title h1 {
+	float: left;
+}
+.quicklink {
+	display: inline-block;
+	opacity: 0.5;
+}
+.quicklink:hover {
+	opacity: 1;
+}
+.banner {
+	height: 90px;
+	width: 100%;
+}
+.blurb {
+	margin-bottom: 20px;
+}
+
+@media only screen and (min-width : 1224px) {
+	.content {
+		width: 900px;
+		margin: auto;
+	}
+	.content-item {
+		float: left;
+		width: 200px;
+		margin: 10px;
+	}
+	.content-row {
+		height: 200px;
+	}
+}
