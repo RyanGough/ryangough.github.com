@@ -1,10 +1,6 @@
 body {
 	font-family: 'Open Sans', sans-serif;
-	margin: 20px 0px 0px 20px;
-}
-.title {
-/*	width: 350px;
-	margin: auto;*/
+	margin: 10px 10px 0px 10px;
 }
 .title h1 {
 	float: left;
