@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ryan W Gough</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='../styles/ryan.css' rel='stylesheet' type='text/css'>
+    <link href='../styles/monokai_sublime.css' rel='stylesheet' type='text/css'>
+    <script src='../scripts/highlight.pack.js'></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+  <div class="banner">
+    <div class="title">
+      <h1>Ryan W Gough</h1>
+    </div>
+    <div class="quicklink">
+      <a href="../index.html">Home</a>
+    </div>
+    <div class="quicklink">
+      <a href="index.html">Blog</a>
+    </div>
+    <div class="quicklink">
+      <a href="https://twitter.com/ryanwgough">Twitter</a>
+    </div>
+    <div class="quicklink">
+      <a href="https://github.com/RyanGough">GitHub</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="blogpost">
+
+    <h2>Webmachine Post and Redirect</h2>
+
+    <p>I've just started a new project using an Erlang backend that is built on the Basho <a href="https://github.com/basho/webmachine/wiki">Webmachine</a> system.</p>
+    <p>I'm really loving the RESTful nature of Webmachine, but must admit it did take me a little while to figure out how to return a 403 redirect from a POST. I found the odd blog post (<a href="http://russelldb.tumblr.com/post/540387821/webmachine-redirect">here</a> and <a href="http://blog.beerriot.com/2009/05/29/webmachine-post-example/">here</a>) that sort of did what I wanted but not quite. Eventually, after a bit of debugging and much consulatation of <a href="https://github.com/basho/webmachine/wiki/Diagram">The Diagram</a> I came up with the following.</p>
+
+<pre>
+<code class="erlang">
+allow_missing_post(ReqData, State) ->
+    {true, ReqData, State}.
+
+post_is_create(ReqData, State) ->
+    {true, ReqData, State}.
+
+create_path(ReqData, State) ->
+    {"/my_redirect_location", ReqData, State}.
+
+content_types_accepted(ReqData, State) ->
+    {[{"application/x-www-form-urlencoded", process_form}], ReqData, State}.
+
+process_form(ReqData, State) ->
+    %% do stuff
+    {true, wrq:do_redirect(true, ReqData), State};      
+</code>
+</pre>
+
+    <p>So I think you need to have the allow_missing_post and post_is_create functions return true and the create_path function return the path you want to redirect to.</p>
+    <p>Then you need to have the content type mapped to a handler function which calls the request modification function "do_redirect".</p>
+
+    <p>Oh, also I'm probably reinventing the wheel (and probably badly) but I wrote my a couple of functions to turn a POSTed form into a proplist for processing in the handler.</p>
+  
+<pre>
+<code class="erlang">
+parse_form_body(FormBody) ->
+    Tokens = binary:split(FormBody, <<"&">>, [global]),
+    lists:foldl(fun(X, Acc) -> add_to_proplist(X, Acc) end, [], Tokens).
+
+add_to_proplist(Item, Items) ->
+    [Key, Value] = binary:split(Item, <<"=">>, [global]),
+    [{Key, Value}|Items].     
+</code>
+</pre>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>

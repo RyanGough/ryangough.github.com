@@ -4,10 +4,6 @@ body {
 }
 .quicklink {
 	display: inline-block;
-	opacity: 0.5;
-}
-.quicklink:hover {
-	opacity: 1;
 }
 .banner {
 	margin: auto;
@@ -17,6 +13,9 @@ body {
 }
 .blurb {
 	margin-bottom: 20px;
+}
+.bloglist a {
+	margin-right: 20px;
 }
 
 @media only screen and (min-width : 1224px) {
