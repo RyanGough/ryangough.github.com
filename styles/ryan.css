@@ -2,9 +2,6 @@ body {
 	font-family: 'Open Sans', sans-serif;
 	margin: 10px;
 }
-.title h1 {
-	float: left;
-}
 .quicklink {
 	display: inline-block;
 	opacity: 0.5;
@@ -13,8 +10,10 @@ body {
 	opacity: 1;
 }
 .banner {
-	height: 90px;
-	width: 100%;
+	margin: auto;
+	height: 120px;
+	width: 80%;
+	text-align: center;
 }
 .blurb {
 	margin-bottom: 20px;
