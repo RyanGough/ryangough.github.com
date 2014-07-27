@@ -20,7 +20,7 @@ body {
 }
 
 .content-item {
-	margin: 8px;
+	margin-top: 8px;
 }
 
 @media only screen and (min-width : 1224px) {
