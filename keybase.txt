@@ -1,0 +1,65 @@
+==================================================================
+https://keybase.io/ryanwgough
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://ryanwgough.com
+  * I am ryanwgough (https://keybase.io/ryanwgough) on keybase.
+  * I have a public key with fingerprint 76D7 9BF6 4DCC 47E5 FF68  8650 1246 5F3C 877B EED6
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "76d79bf64dcc47e5ff68865012465f3c877beed6",
+            "host": "keybase.io",
+            "key_id": "12465f3c877beed6",
+            "uid": "12cebe64c1e92a6b91c6c146951c7d00",
+            "username": "ryanwgough"
+        },
+        "service": {
+            "hostname": "ryanwgough.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1410987930,
+    "expire_in": 157680000,
+    "prev": "282e505162847f1b865f4d8ca5190cbf91f5c13b739df98049406eb390344b1c",
+    "seqno": 3,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v1.0.3
+Comment: https://keybase.io/crypto
+
+yMHjAnicbZFdSBRRFMd3rdUUxXwwVNBkyghadO7uzJ0PCgqJpIesKDBp2Z25c2d3
+cN1ZZ2fX1q/QkoyikCJiy5dICNNAkGDbTDOpB0kLLaLICIogfAgrC/OjO2FPdV8u
+95zf/3/OuWc8Z50ty55b2F+7bXmx1z4x+j1qO1L4I9FMyboSp8Rmqg7/uVQt5MdG
+2NBCJiVSHFQ4QVYhoyDEcJhVVcjzkKWBi4Gs6kY8x8kYK5ByUgE9YimIjSxFcLmm
+kxh5eDWFRP/DR9cSCMsYMghgwSVBWQAIIsBAgQWIU2jaAiPYCEn1mNBGXAo1+vWo
+P0C1OikSj2kIW11bxf9hypFeT/RhQzd1pAdJLmCaYdGSmvGwxTZi2bvm4pW1kEJm
+J4IYNiKaHqJEQEhkapYtYAAt8Jzgpp0UPhHWDOzVLILlIE+TY5XBMWLp4l2YpVkA
+XTzDqUAmv6UyCo8kFgg0klUBqCwCbplzC4oq8DQjMDTEslug3QwjA0RZczWEdEp0
+kzYlP7GMaP6QZEYNTLWOjR5fb7Nn2dIdadb2bFmZG//ulM7OWOFSm9/8TInddV9H
+eo7t3nm+uGcT7I9fC16RimbOfLwZezhfXbolu6ri23gPaFr9kLgRHtTSu+KzB3Sx
+mL800vWyLpi5DAcOH3zc5R9ePeWopbJ/9R96NrB3u2NSe0EZFQVPS2r25b+639kw
+lJw5W1y2Yz9MTdvftp+b83WCvtJbZaOdj+p7S5teZ063PXln1kzu8fjay6JV9omY
+mWg6+aBN1PIv1H5KXi9JzlV2eBY38IvLwZQv0DF82pE3veLJbcn54inpHuqtdL4f
+ljo+5y0ssWbfrssFianqsQQ//7zldtrgnanZcBI3+pqX7l71XRzTFzKKtkaOipzn
+3m96yBTw
+=ZlEf
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ryanwgough
+
+==================================================================
