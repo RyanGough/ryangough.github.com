@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ryan W Gough</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='../styles/ryan.css' rel='stylesheet' type='text/css'>
+    <link href='../styles/monokai_sublime.css' rel='stylesheet' type='text/css'>
+    <script src='../scripts/highlight.pack.js'></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+  <div class="banner">
+    <div class="title">
+      <h1>Ryan W Gough</h1>
+    </div>
+    <div class="quicklink">
+      <a href="../index.html">Home</a>
+    </div>
+    <div class="quicklink">
+      <a href="index.html">Blog</a>
+    </div>
+    <div class="quicklink">
+      <a href="https://twitter.com/ryanwgough">Twitter</a>
+    </div>
+    <div class="quicklink">
+      <a href="https://github.com/RyanGough">GitHub</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="blogpost">
+
+      <h2>Designing Microservices</h2>
+
+      <p>An article from <a href="http://blog.cleancoder.com/uncle-bob/2014/09/19/MicroServicesAndJars.html">Uncle Bob</a> stimulated a bit of a debate in my office recently. The question was, leaving aside some of the funky architectural possibilities that Microservices can enable (elastic scaling etc.) and the ability to mix and match languages and platforms, can other benefits of Microservices, such as ease of testing and independent deployment, be replicated in a well-structured "monolith" application?</p>
+
+      <p>I'm pretty sure the answer is yes, but I'm starting to think it probably helps to think about your system in terms of Microservices anyway, even if you then chose to implement those Microservices as linked libraries in a single application.</p>
+
+      <p>One of things about the Microservices approach is that it demands some more design up front in order to identify the services and their responsibilities, and how they are going to communicate. I think this is probably the most important part of any design as it focuses at a level above software abstractions and patterns and instead focuses on the desired behaviours of the system components. In his description of <a href="http://alistair.cockburn.us/Hexagonal+architecture">Hexagonal Architecture</a> a.k.a "ports and adapters", Alistair Cockburn talks about how ports "identify a purposeful conversation" and designing the APIs of potential Microservices is effectively defining the ports of those components and therefore the "purposeful conversation" that will describe the entire system.</p>
+
+      <p>And yes, there is no need to take a Microservices approach in order to tackle this kind of design exercise, but it seems to me that it's more likely to happen when designing systems in this way. In more traditional architectures and approaches I find that design conversations are more likely to get skewed towards layered architectures or get shrouded in pattern language. Or sometimes a fear of doing "Big Design Up Front" discourages any design up front and instead we try to make our design emerge through TDD. I'm sure many people are skilled enough to create beautiful designs in this way but it is something that I struggle with.</p>
+
+      <p>Perhaps it might help to design as if you are building Microservices, even if you end up implementing a monolith.</p>
+
+    </div>
+  </div>
+</body>
+</html>
