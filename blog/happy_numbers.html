@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ryan W Gough</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='../styles/ryan.css' rel='stylesheet' type='text/css'>
+    <link href='../styles/monokai_sublime.css' rel='stylesheet' type='text/css'>
+    <script src='../scripts/highlight.pack.js'></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-41060826-3', 'auto');
+      ga('send', 'pageview');
+    </script>
+</head>
+<body>
+  <div class="banner">
+    <div class="title">
+      <h1>Ryan W Gough</h1>
+    </div>
+    <div class="quicklink">
+      <a href="../index.html">Home</a>
+    </div>
+    <div class="quicklink">
+      <a href="index.html">Blog</a>
+    </div>
+    <div class="quicklink">
+      <a href="https://twitter.com/ryanwgough">Twitter</a>
+    </div>
+    <div class="quicklink">
+      <a href="https://github.com/RyanGough">GitHub</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="blogpost">
+
+    <h2>Happy Numbers</h2>
+
+    <p>I'm not great with numbers but I do quite enjoy a mathematical kata. I've done a few in the past at the excellent <a href='https://projecteuler.net/'>Project Euler</a> but most recently I came across one in a blog post from Kevin Rutherford - The <a href= 'http://silkandspinach.net/2014/11/08/the-happy-numbers-kata/'>Happy Numbers Kata</a>.</p>
+
+    <p>I thought it would be a good chance to practise some Erlang which is kind of my hobby languauge at the moment. It turned out to be a really useful in teaching me about different Erlang data strucutres and some other handy bits and bobs like timers, which I thought I could share here. So here goes, my first solution to the problem looked like this:</p>
+
+<pre>
+<code class="erlang">
+-module (happy).
+
+-export([get_happy_numbers/1]).
+
+get_happy_numbers(Seq) ->
+  lists:filter(fun(X) -> is_happy_number(X) end, Seq).
+
+is_happy_number(Number) ->
+  is_happy_number(Number, []).
+
+is_happy_number(Number, Tested) ->
+  case lists:member(Number, Tested) of
+    true ->
+      false;
+    false ->
+      Digits = get_digits(Number),
+      SumOfSquares = sum_of_squares(Digits),
+      case SumOfSquares of
+        1 ->
+          true;
+        _->
+          is_happy_number(SumOfSquares, [Number|Tested])
+      end
+  end.
+
+get_digits(Number) ->
+  lists:map(fun(CharCode) -> (CharCode - 48) end, integer_to_list(Number)).
+
+sum_of_squares(Numbers) ->
+  lists:foldl(fun(X, Sum) -> Sum + (X * X) end, 0, Numbers).      
+</code>
+</pre>
+
+
+    <p>Hopefully this is pretty easy to follow even if you don't know Erlang. Most of the work is done in the <i>is_happy_number/2</i> function, which calls itself recursively with the sum of the squares of the digits of the given number, until it gets to 1 for a happy number, or finds a number it has visited before and is therefore in a cycle and is an unhappy number. The approach for turning a number into a list of integers seemed a bit hacky, but it works and is simple enough.</p>
+
+    <p>With this kind of kata, getting a 'correct' solution is usually only half the battle. The aim is then to make an efficient solution such that it can solve the problem for a large input in as short as time as possible. In Kevin's blog post he mentioned checking how big a range could be checked within 5 seconds as a test of the efficiency of the solution. With that in mind I fired up the Erlang shell and used the <i>timer:tc/3</i> function to measure the performance. This function returns the time taken to execute the specified function in microseconds, as well as the return value of the function.</p>
+
+
+<pre>
+<code class="Erlang REPL">
+1> c("happy.erl").
+{ok, happy}
+2> timer:tc(happy, get_happy_numbers, [lists:seq(1,600000)]).
+{4981907,
+  [1,7,10,13...]}
+</pre>
+</code>
+
+
+  <p>So in this case it was approx 5 seconds for a range of 1-600000. I then tried to think of things I could do to speed it up, and two ideas came to mind. The first was that I could do a simple map/reduce type operation to get some parallelisation. No point having one of my cores sat there doing nothing! With Erlang, this turned out to be pretty simple, I just added the following functions:</p>
+
+
+<pre>
+<code class="erlang">
+mr_get_happy_numbers(Seq) ->
+  MidPoint = trunc(length(Seq) / 2),
+  {Seq1, Seq2} = lists:split(MidPoint, Seq),
+  Self = self(),
+  spawn(fun() -> Self ! happy:get_happy_numbers(Seq1) end),
+  spawn(fun() -> Self ! happy:get_happy_numbers(Seq2) end),
+  wait_for_response(2, []).
+
+wait_for_response(0, Acc) ->
+  Acc;
+wait_for_response(WaitingOn, Acc) ->
+  receive
+    HappyNumbers ->
+      wait_for_response(WaitingOn - 1, lists:append(Acc, HappyNumbers))
+  end.    
+</code>
+</pre>
+
+<p>The <i>mr_get_happy_numbers/1</i> function splits the input sequence into two, and then spawns two functions which call the get_happy_numbers function I created earlier with each half of the input sequence and then send the results as a message back to the parent process. After spawning the funtions it then waits for 2 responses to arrive back, which will be appended to a list to create the full answer. Lets fire up a shell and give it a try...</p>
+
+<pre>
+<code class="Erlang REPL">
+1> c("happy.erl").
+{ok, happy}
+2> timer:tc(happy, mr_get_happy_numbers, [lists:seq(1,600000)]).
+{2863933,
+  [1,7,10,13...]}
+</pre>
+</code>
+
+<p>Not far off half the time of the single process version! A few more tests showed I could now get up to a range of just over 1 million.</p>
+
+<p>Next I thought I would try to optimise the actual algorithm for finding the happy numbers. I thought one obvious idea was storing which numbers had previously been determined to be happy or unhappy. Then as soon as I came across one of these when going through the recursive process of summing the squares of the digits I would be able to terminate, rather than waiting to hit a cycle or reach 1. This turned out to be a bit more tricky than the map/reduce. After a few aborted attempts I came up with this:</p>
+
+<pre>
+<code class="erlang">
+get_happy_numbers(InputSeq) ->
+                sets:to_list(sets:intersection(get_happy_numbers(InputSeq, sets:new(), sets:new()), sets:from_list(InputSeq))).
+ 
+get_happy_numbers([], HappyNumbers, _UnhappyNumbers) ->
+                HappyNumbers;
+get_happy_numbers([NumberToTest|RestOfInputSeq], HappyNumbers, UnhappyNumbers) ->
+                {NewHappyNumbers, NewUnhappyNumbers} = categorise_numbers(NumberToTest, sets:new(), HappyNumbers, UnhappyNumbers),
+                get_happy_numbers(RestOfInputSeq, NewHappyNumbers, NewUnhappyNumbers).
+ 
+categorise_numbers(Number, Visited, HappyNumbers, UnhappyNumbers) ->
+  case sets:is_element(Number, Visited) of
+    true ->
+      {HappyNumbers, sets:union(UnhappyNumbers, Visited)};
+    false ->
+      case sets:is_element(Number, UnhappyNumbers) of
+        true ->
+          {HappyNumbers, sets:union(UnhappyNumbers, Visited)};
+        false ->
+          case sets:is_element(Number, HappyNumbers) of
+            true ->
+              {sets:union(HappyNumbers, Visited), UnhappyNumbers};
+            false ->
+              SumOfSquares = sum_of_squares(get_digits(Number)),
+              case SumOfSquares of
+                1 ->
+                  {sets:union(HappyNumbers, sets:add_element(Number, Visited)), UnhappyNumbers};
+                _->
+                  categorise_numbers(SumOfSquares, sets:add_element(Number, Visited), HappyNumbers, UnhappyNumbers)
+              end
+          end
+      end
+  end.   
+</code>
+</pre>
+
+<p>Yuck! Pretty ugly, and this code probably shows how much of a newbie I am with Erlang. It could clearly be tidied up a bit but i'll leave it as I coded it. Because of the need to pass around the sets of Happy and Unhappy numbers, I had abandoned the original approch of using <i>lists:filter/2</i> with <i>is_happy_number/1</i> as a predicate and had a couple of recursive functions. This seemed necessary to me as I needed to keep adding to the set of happy numbers and as data is immutable in Erlang that meant needing the recursive function to call itself with a new version of the set each time. As I said I'm pretty new to the world of Erlang / functional programming so perhaps this was a mistake but anyhoo, lets see how it performs with these changes.</p>
+
+<pre>
+<code class="Erlang REPL">
+1> c("happy.erl").
+{ok, happy}
+2> timer:tc(happy, get_happy_numbers, [lists:seq(1,600000)]).
+{21261772,
+  [131788,85434,546158,453450...]}
+</pre>
+</code>
+
+<p>What? Over 21 seconds? Over 4 times slower that the original, naive version! I played around with this code for a while. Logging out the behaviour to check that it was hitting the 'cache' of happy numbers correctly (it was) etc. I wondered if perhaps Erlang sets were the wrong choice of data structure. I had chosen it because I thought the look ups would be fast but perhaps I was wrong. I tried a few different data types, dicts, proplists etc. All remained slower than the original code.</p>
+
+<p>I think the efficiency problem with this approach is related to the ugliness problem. The need to be constantly passing copies of the data structures is probably what makes it so slow. I figure simple lists are highly optimised for copying but some of these other data structures built on top of lists are probably a bit less efficient. If you know for sure this is the case then please educate me on Twitter or something! Eventually I came across the correct data strucutre to use in this situation - ETS tables.</p>
+
+<p>ETS (Erlang Term Storage) are a feature of Erlang that is essentially like an in-memory database for Erlang terms. They can even be shared between processes and you don't need to pass copies of ETS tables around, they use "Process Semantics" so any process can access a table by name as if they were talking to another process. This was especially handy in this situation as it means in my map reduce version, both child processes can share the same ets table. I've heard some criticisms that this violates the "no shared state between processes" ideal of Erlang, but the use of process semantics for the tables does seem to mitigate this somewhat. Anyway, here is the final version of the code:</p>
+
+<pre>
+<code class="erlang">
+-module (happy).
+
+-export([get_happy_numbers/1,get_happy_numbers_filter/1,mr_get_happy_numbers/1]).
+
+get_happy_numbers(Seq) ->
+  ets:new(happynumbers, [set, named_table, public]),
+  Happy = get_happy_numbers_filter(Seq),
+  ets:delete(happynumbers),
+  Happy.
+
+get_happy_numbers_filter(Seq) ->
+  lists:filter(fun(X) -> is_happy_number(X) end, Seq).
+
+is_happy_number(Number) ->
+  is_happy_number(Number, []).
+
+is_happy_number(Number, Tested) ->
+  case get_from_happytable(Number) of
+    [{Number, true}] ->
+      add_to_happytable(lists:map(fun(X) -> {X, true} end, Tested)),
+      true;
+    [{Number, false}] ->
+      add_to_happytable(lists:map(fun(X) -> {X, false} end, Tested)),
+      false;
+    [] ->   
+      case lists:member(Number, Tested) of
+        true ->
+          add_to_happytable(lists:map(fun(X) -> {X, false} end, Tested)),
+          false;
+        false ->
+          Digits = get_digits(Number),
+          SumOfSquares = sum_of_squares(Digits),
+          case SumOfSquares of
+            1 ->
+              add_to_happytable(lists:map(fun(X) -> {X, true} end, Tested)),
+              true;
+            _->
+              is_happy_number(SumOfSquares, [Number|Tested])
+          end
+      end
+  end.
+
+get_digits(Number) ->
+  lists:map(fun(CharCode) -> (CharCode - 48) end, integer_to_list(Number)).
+
+sum_of_squares(Numbers) ->
+  lists:foldl(fun(X, Sum) -> Sum + (X * X) end, 0, Numbers).
+
+add_to_happytable(Items) ->
+  ets:insert(happynumbers, Items).
+
+get_from_happytable(Key) ->
+  ets:lookup(happynumbers, Key).
+%
+% Simple map/reduce of get_happy_numbers
+% 
+
+mr_get_happy_numbers(Seq) ->
+  ets:new(happynumbers, [set, named_table, public]),
+  MidPoint = trunc(length(Seq) / 2),
+  {Seq1, Seq2} = lists:split(MidPoint, Seq),
+  Self = self(),
+  spawn(fun() -> Self ! happy:get_happy_numbers_filter(Seq1) end),
+  spawn(fun() -> Self ! happy:get_happy_numbers_filter(Seq2) end),
+  Happy = wait_for_response(2, []),
+  ets:delete(happynumbers),
+  Happy.
+
+wait_for_response(0, Acc) ->
+  Acc;
+wait_for_response(WaitingOn, Acc) ->
+  receive
+    HappyNumbers ->
+      wait_for_response(WaitingOn - 1, lists:append(Acc, HappyNumbers))
+  end.
+</code>
+</pre>
+
+<pre>
+<code class="Erlang REPL">
+1> c("happy.erl").
+{ok, happy}
+2> timer:tc(happy, get_happy_numbers, [lists:seq(1,600000)]).
+{2265788,
+  [1,7,10,13...]}
+3> timer:tc(happy, mr_get_happy_numbers, [lists:seq(1,600000)]).
+{1507331,
+  [1,7,10,13...]}
+</pre>
+</code>
+
+<p>The results from the shell show that the non-parallelised version now does 1-600000 in 2.26 seconds, and the map/reduce version does it in just 1.5 seconds. A few more tests showed I could now get up to a range of about 1.9 million.</p>
+
+<p>I'm sure there are futher improvements to make, both to the design of the code and perhaps the algorithm, maybe making use of some cleverer maths but I'm going to leave it there for now. It was a fun kata though, and I really learned a lot, especially about the importance of choosing the correct data types!</p>
+
+  </div>
+  </div>
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+</body>
+</html>
