@@ -23,6 +23,11 @@ body {
 	margin-top: 8px;
 }
 
+.footnotes {
+	padding-left: 0px;
+	margin: 10px;
+}
+
 @media only screen and (min-width : 1224px) {
 	.content {
 		width: 900px;

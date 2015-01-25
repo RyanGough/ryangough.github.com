@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ryan W Gough</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='../styles/ryan.css' rel='stylesheet' type='text/css'>
+    <link href='../styles/monokai_sublime.css' rel='stylesheet' type='text/css'>
+    <script src='../scripts/highlight.pack.js'></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-41060826-3', 'auto');
+      ga('send', 'pageview');
+    </script>
+</head>
+<body>
+  <div class="banner">
+    <div class="title">
+      <h1>Ryan W Gough</h1>
+    </div>
+    <div class="quicklink">
+      <a href="../index.html">Home</a>
+    </div>
+    <div class="quicklink">
+      <a href="index.html">Blog</a>
+    </div>
+    <div class="quicklink">
+      <a href="https://twitter.com/ryanwgough">Twitter</a>
+    </div>
+    <div class="quicklink">
+      <a href="https://github.com/RyanGough">GitHub</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="blogpost">
+
+      <h2>7 Languauges - Ruby</h2>
+        <i>Myself and a few colleagues are working through <a href='https://pragprog.com/book/btlang/seven-languages-in-seven-weeks'>Seven Languages in Seven Weeks</a> We've just completed week 1 - Ruby.</i>
+
+        <p>I still can't make up my mind about Ruby. At first I really liked it. The syntax looked clean, no semi-colons or braces, being able to omit parentheses when calling functions with a single parameter etc. I also liked all the array methods that accept blocks (essentially functions) that allow mapping and filtering etc. I even liked the one-liner conditionals using 'unless' or 'if' which seemed to me concise and expressive. My notes show that the only minor quibbles I had after day 1 were 0 being truthy and "elsif" missing an e - I can accept elif, elseif and else if, elsif is weird :) </p>
+
+        <p>After day 2 and 3 there were more things I liked. In many ways I appreciated the openness of the language, that everything was so easily accessible to the programmer, such as the supported methods on an object or even its object_id, and the consistency of "everything is an object" philosophy. The meta-programming possibilities in Ruby look great, and along with the ability to bend the syntax with things like method_missing make it seem like a great language for writing a DSL. Another thing I liked about method_missing was that it serves to emphasise the message passing semantics of calling object methods, which is perhaps easy to forget in other common OO languages.</p>
+
+        <p>Despite all this, I didn't find myself really warming to the language. I think perhaps the highly dynamic nature, the syntactic sugar, the multiple ways of expressing things and not too mention the sheer size of some of the standard classes <a href="#footnote1" rel="footnote"><sup>1</sup></a> made the language feel a bit less coherent than others I have tried. I think I have a 'less is more' preference for programming languages. To me smaller languauges seem a bit more elegant, though I appreciate that they can appear less 'readable'. In fact, that reminds me of a little rant I need to have about what readability means but that can wait for another blog post :) </p>
+
+        <p>Anyway, Ruby, it was nice to meet you again, but I think you'll remain just a passing acquaintance. It's time to go an introduce myself to IO!</p>
+
+
+        <ol class='footnotes'>
+          <li id='footnote1'><cite>String.methods.size returned 81 in the version of Ruby I was running, which I think is around twice the number of string methods in JavaScript. On the other hand, I suppose it was pretty cool that I could find that out so easily - I had to look in the Mozilla docs for JS :)</cite></li>
+        </ol>
+
+    </div>
+  </div>
+</body>
+</html>
