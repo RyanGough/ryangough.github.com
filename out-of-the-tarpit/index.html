@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Out Of The Tar Pit (tackling complexity in software)</title>
+
+		<meta name="description" content="A discussion of the paper Out Of The Tar Pit by Ben Mosely and Peter Marks">
+		<meta name="author" content="Ryan Gough">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Out Of The Tar Pit</h2>
+                                        <p><small>2006 - Ben Mosely & Peter Marks <a href="http://shaffner.us/cs/papers/tarpit.pdf">pdf</a></small><p>
+                                        
+				</section>
+                                <section>
+                                    <h2>Contents.</h2>
+                                    <ol>
+                                        <li>What is meant by complexity.</li>
+                                        <li>Why complexity is a problem.</li>
+                                        <li>Causes of complexity.</li>
+                                        <li>In relation to common programming paradigms.</li>
+                                        <li>Proposal for an optimum solution.</li>
+                                    </ol>
+                                </section>
+                                </section>
+				<section>
+					<h2>What is complexity?</h2>
+                                        <blockquote class="fragment">
+                                            ...the type of complexity we are discussing in this paper is that which makes large systems
+                                            hard to understand.
+                                        </blockquote>
+				</section>
+				<section>
+                                    <section>
+					<h2>Why is complexity important?</h2>
+                                        <blockquote class="fragment">
+                                            The primary status of complexity as the major cause of [the problems of software development] comes simply from the fact that being
+                                            able to understand a system is a prerequisite for avoiding all of them
+                                        </blockquote>
+                                    </section>
+                                    <section>
+                                        <h2>Approaches to understanding.</h2>
+                                        <ol>
+                                            <li>Testing</li>
+                                            <li>Informal Reasoning</li>
+                                        </ol>
+                                    </section>
+				</section>
+				<section>
+                                        <section>
+                                            <h2>Causes of complexity.</h2>
+                                            <p>A look at the common causes of complexity that not inherent to the problem domain.</p>
+                                        </section>
+                                        <section>
+                                            <h2>State</h2>
+                                            <p>The stored information, at a point in time, to which the program has access.</p>
+                                            <ul>
+                                                <li class="fragment">Each bit of state <em>doubles</em> the total number of states</li>
+                                                <li class="fragment">Otherwise pure functions that call stateful functions are stateful.</li>
+                                                <li class="fragment">Results potentially affected by everything that has gone before.*</li>
+                                            </ul>
+                                            <p class="fragment">This is why rebooting works!</p>
+                                        </section>
+                                        <section>
+                                            <h2>Control</h2>
+                                            <p>Specification of the order in which program statements are executed.</p>
+                                            <ul>
+                                                <li class="fragment">Over specification, how as opposed to what.</li>
+                                                <li class="fragment">We must understand which orderings are actually important.</li>
+                                                <li class="fragment">Concurrency, another level of complexity.</li>
+                                            </ul>
+                                        </section>
+                                        <section>
+                                            <h2>Volume</h2>
+                                            <ul>
+                                                <li class="fragment">Often caused by State and Control</li>
+                                                <li class="fragment">Linear or non-linear relationship to complexity?</li>
+                                            </ul>
+                                        </section>
+                                        <section>
+                                            <h2>Others.</h2>
+                                            <ul>
+                                                <li>Complexity breeds complexity</li>
+                                                <li>Simplicty is hard</li>
+                                                <li>Power corrupts</li>
+                                            </ul> 
+                                        </section>
+				</section>
+				<section>
+                                        <section>
+                                            <h2>Managing complexity.</h2>
+                                            <p>How the problems of complexity are tackled in common programming paradigms.</p>
+                                        </section>
+                                        <section>
+                                            <h2>Object Orientation.</h2>
+                                            <ul>
+                                                <li class="fragment">Traditionally encourage state, though encapsulated.</li>
+                                                <li class="fragment">Typically imperative, explicit flow of control.</li>
+                                                <li class="fragment">Identity vs Value.</li>
+                                            </ul>
+                                            <p class="fragment"><em>Not suitable for controlling complexity.</em></p>
+                                        </section>
+                                        <section>
+                                            <h2>Functional Programming.</h2>
+                                            <ul>
+                                                <li class="fragment">Discourage mutable state, simpler concurrency.</li>
+                                                <li class="fragment">More declarative, use of functions over collections i.e map / reduce etc.</li>
+                                                <li class="fragment">Not immune from state-like, approaches.</li>
+                                                <li class="fragment">Less modularity than OOP.</li>
+                                            </ul>
+                                            <p class="fragment"><em>Improvement over OOP, especially with regard to state.</em></p>
+                                        </section>
+                                        <section>
+                                            <h2>Logic Programming.</h2>
+                                            <ul>
+                                                <li class="fragment">Even more declarative style than FP.</li>
+                                                <li class="fragment">Actual implmentations (i.e. Prolog) often include state and flow of control issues, i.e. non-termination.</li>
+                                            </ul>
+                                        </section>
+                                        <section>
+                                            <h2>The Relational Model</h2>
+                                            <blockquote>
+                                                 ... an elegant approach to structuring data, a means for manipulating such data,
+                                                 and a mechanism for maintaining integrity and consistency of state
+                                            </blockquote>
+                                            <ul>
+                                                <li>Query languages typically minimal state, minimal flow control.</li>
+                                                <li>Doesn't have to be SQL (which does have some problems).</li>
+                                                <li>"Lower powered" Prolog variants, like Datalog, have potential.*</li>
+                                            </ul>
+                                        </section>
+				</section>
+                                <section>
+                                    <section>
+                                        <h2>Functional Relational Programming.</h2>
+                                        <p>A proposed optimum approach for minimising complexity, making use of functional / logical paradigms along with Codd's relational model.</p>
+                                    </section>
+                                    <section>
+                                        <h2>Ideal scenario.</h2>
+                                        <p>The system is restricted to the following three elements.</p>
+                                        <ol>
+                                            <li>Essential state, captured in a relational model.</li>
+                                            <li>Essential logic, captured in relational model or in pure functions.</li>
+                                            <li>Accidental state and control.</li>  
+                                        </ol>
+                                    </section>
+                                    <section>
+                                        <h2>Accidental state and control.</h2>
+                                        <ul>
+                                            <li class="fragment">Required for performance / scalability etc.</li>
+                                            <li class="fragment">Seperated from essentials.</li>
+                                            <li class="fragment">System should run in absence of this component.</li>
+                                            <li class="fragment">Declarative performance hints.</li>
+                                        </ul>
+                                    </section>
+                                </section>
+                                <section>
+                                    <h2>Questions / Discussion</h2>
+                                    <ul>
+                                        <li class="fragment">Emphasis on relational model, are devs comfortable?</li>
+                                        <li class="fragment">How do micro-service architectures compare to this approach?</li>
+                                        <li class="fragment">Anyone up for a compsci UG in Manchester?</li>
+                                    </ul>
+                                    <p>Slides at <a href="http://www.ryanwgough.com">http://www.ryanwgough.com</a></p>
+                                    <p><a href="https://twitter.com/ryanwgough">@ryanwgough</a> on Twitter</p>
+                                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
