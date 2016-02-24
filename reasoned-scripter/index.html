@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>The Reasoned 'Scripter (Adventures in JavaScript Logic Programming)</title>
+
+		<meta name="description" content="An introduction to the ideas of Logic Programming as background for a JS micro-kanren implementation.">
+		<meta name="author" content="Ryan Gough">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/xcode.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+                <!-- local styles -->
+                <style type="text/css">
+                    .left {
+                        float: left
+                    }
+                    .faded {
+                        opacity: 0.5
+                    }
+                    #map {
+                        width: 400px;
+                        margin-right: 30px;
+                        margin-top: 25px;
+                    }
+                    .progsandlangs li {
+                        list-style-type: none;
+                    }
+                </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+                                    <h1>The Reasoned 'Scripter</h1>
+                                    <h4>Adventures in JavaScript Logic Programming</h4>
+                                    <a href="https://twitter.com/ryanwgough">@ryanwgough</a>
+				</section>
+                                <!-- Formal Logic Section-->
+				<section>
+                                    <section>
+                                        <h2>What is Logic?</h2>
+                                    </section>
+                                    <section>
+                                        <ul>
+                                            <li>The branch of philosophy / mathematics concerned with reasoning.</li>
+                                            <li class="fragment">The rules about how we deduce new facts from existing data.</li>
+                                            <li class="fragment">Foundation of computing!</li>
+                                        </ul>
+                                    </section>
+                                    <section>
+                                        <h3>Propositional Logic</h3>
+                                        <code>
+                                            <p>Margaret Hamilton is a programmer</p>
+                                            <p>AND</p>
+                                            <p>Margaret Hamilton programs Assembly</p>
+                                        </code>
+                                    </section>
+                                    <section>
+                                        <h3>Relational Logic</h3>
+                                        <code>
+                                            <p><strong>Programmer</strong>(Margaret Hamilton)</p
+                                            <p>AND</p>
+                                            <p><strong>Programs</strong>(Margaret Hamilton, Assembly)</p>
+                                        </code>
+                                    </section>
+                                    <section>
+                                        <h3>What is a relation?</h3>
+                                        <p class="fragment">An n-ary relation is a subset of the Cartesian product of n sets.</p>
+                                    </section>
+                                    <section>
+                                        <div>
+                                            <div class="left">
+                                                <h4>Programmers</h4>
+                                                <ul class="progsandlangs">
+                                                    <li>Adele Goldberg</li>
+                                                    <li>Margaret Hamilton</li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <h4>Languages</h4>
+                                                <ul class="progsandlangs">
+                                                    <li>Smalltalk</li>
+                                                    <li>Assembly</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <ul class="progsandlangs" style="margin-top: 60px">
+                                            <li>Adele Goldberg, Smalltalk</li>
+                                            <li>Adele Goldberg, Assembly</li>
+                                            <li>Margaret Hamilton, Smalltalk</li>
+                                            <li>Margaret Hamilton, Assembly</li>
+                                        </ul>
+                                    </section>
+                                    <section>
+                                        <code>
+                                            <p><strong>Programs</strong>(Adele Goldberg, Smalltalk)</p>
+                                            <p><strong>Programs</strong>(Margaret Hamilton, Assembly)</p>
+                                        </code>
+                                        <ul class="progsandlangs" style="margin-top: 20px">
+                                            <li><strong>Adele Goldberg, Smalltalk</strong></li>
+                                            <li class="faded">Adele Goldberg, Assembly</li>
+                                            <li class="faded">Margaret Hamilton, Smalltalk</li>
+                                            <li><strong>Margaret Hamilton, Assembly</strong></li>
+                                        </ul>
+                                    </section>
+                                    <section>
+                                        <h3>Variables and Quantification</h3>
+                                        <code>
+                                            <p>There exists an X such that:</p>
+                                            <p><strong>Programs</strong>(X, Smalltalk)</p>
+                                        </code>
+                                    </section>
+                                </section>
+                                <!-- Logic Programming Section-->
+                                <section>
+                                    <section>
+                                        <h2>What is Logic Programming?</h2>
+                                    </section>
+                                    <section>
+                                        <ul>
+                                            <li>Programming paradigm based on formal logic.</li>
+                                            <li class="fragment">Functional Programming's quiet, bookish sibling.</li>
+                                            <li class="fragment">Fun!</li>
+                                        </ul>
+                                    </section>
+                                    <section>
+                                        <div>
+                                            <h3>Map Colouring Prolog Style</h3>
+                                            <div class="left">
+                                                <img id="map" src="img/map-color-states.png"/>
+                                            </div>
+                                            <div class="left">
+
+    <pre style="width: 450px; box-shadow: none;"><code class="fragment" style="max-height: 600px">different(red,green).
+    different(green,red).
+    different(red,blue).
+    different(blue,red).
+    different(red,yellow).
+    different(yellow,red).
+    different(yellow,green).
+    different(green,yellow).
+    different(yellow,blue).
+    different(blue,yellow).
+    different(green,blue).
+    different(blue,green).
+
+    colour(Ten,Mis,Ala,Geo,Flo) :-
+        different(Ten,Mis),
+        different(Ten,Ala),
+        different(Ten,Geo),
+        different(Mis,Ala),
+        different(Ala,Geo),
+        different(Ala,Flo),
+        different(Geo,Flo).</code></pre>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <h3>Datalog</h3>
+                                        <img style="border: none;" src="img/datomic-datalog.png"/>
+                                    </section>
+                                    <section>
+                                        <h3>A better way to express ourselves?</h3>
+                                        <ul>
+                                            <li class="fragment">Declarative</li>
+                                            <li class="fragment">Economic</li>
+                                            <li class="fragment">Simple / Elegant</li>
+                                        </ul>
+                                    </section>
+                                </section>
+                                <section>
+                                    <img style="border: none;" src="img/schemer.jpg"/>
+                                </section>
+                                <section>
+                                    <h2>Questions / Discussion</h2>
+                                    <p>Slides at <a href="http://www.ryanwgough.com">http://www.ryanwgough.com</a></p>
+                                    <a href="https://twitter.com/ryanwgough">@ryanwgough</a>
+                                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
