@@ -65,35 +65,24 @@
 				</section>
                                 <!-- Formal Logic Section-->
 				<section>
-                                    <section>
-                                        <h2>What is Logic?</h2>
+                                    <section data-background="img/turing.jpg">
+                                        <h1 style="color: white":>What is Logic?</h2>
                                     </section>
                                     <section>
-                                        <ul>
-                                            <li>The branch of philosophy / mathematics concerned with reasoning.</li>
-                                            <li class="fragment">The rules about how we deduce new facts from existing data.</li>
-                                            <li class="fragment">Foundation of computing!</li>
-                                        </ul>
-                                    </section>
-                                    <section>
-                                        <h3>Propositional Logic</h3>
+                                        <h2>Propositional Logic</h2>
                                         <code>
-                                            <p>Margaret Hamilton is a programmer</p>
+                                            <p style="margin-top: 40px">Margaret Hamilton is a programmer</p>
                                             <p>AND</p>
                                             <p>Margaret Hamilton programs Assembly</p>
                                         </code>
                                     </section>
                                     <section>
-                                        <h3>Relational Logic</h3>
+                                        <h2>Relational Logic</h2>
                                         <code>
                                             <p><strong>Programmer</strong>(Margaret Hamilton)</p
                                             <p>AND</p>
                                             <p><strong>Programs</strong>(Margaret Hamilton, Assembly)</p>
                                         </code>
-                                    </section>
-                                    <section>
-                                        <h3>What is a relation?</h3>
-                                        <p class="fragment">An n-ary relation is a subset of the Cartesian product of n sets.</p>
                                     </section>
                                     <section>
                                         <div>
@@ -145,41 +134,34 @@
                                         <h2>What is Logic Programming?</h2>
                                     </section>
                                     <section>
-                                        <ul>
-                                            <li>Programming paradigm based on formal logic.</li>
-                                            <li class="fragment">Functional Programming's quiet, bookish sibling.</li>
-                                            <li class="fragment">Fun!</li>
-                                        </ul>
-                                    </section>
-                                    <section>
                                         <div>
-                                            <h3>Map Colouring Prolog Style</h3>
+                                            <h3>Prolog</h3>
                                             <div class="left">
                                                 <img id="map" src="img/map-color-states.png"/>
                                             </div>
                                             <div class="left">
 
-    <pre style="width: 450px; box-shadow: none;"><code class="fragment" style="max-height: 600px">different(red,green).
-    different(green,red).
-    different(red,blue).
-    different(blue,red).
-    different(red,yellow).
-    different(yellow,red).
-    different(yellow,green).
-    different(green,yellow).
-    different(yellow,blue).
-    different(blue,yellow).
-    different(green,blue).
-    different(blue,green).
+<pre style="width: 450px; box-shadow: none;"><code class="fragment" style="max-height: 600px">different(red,green).
+different(green,red).
+different(red,blue).
+different(blue,red).
+different(red,yellow).
+different(yellow,red).
+different(yellow,green).
+different(green,yellow).
+different(yellow,blue).
+different(blue,yellow).
+different(green,blue).
+different(blue,green).
 
-    colour(Ten,Mis,Ala,Geo,Flo) :-
-        different(Ten,Mis),
-        different(Ten,Ala),
-        different(Ten,Geo),
-        different(Mis,Ala),
-        different(Ala,Geo),
-        different(Ala,Flo),
-        different(Geo,Flo).</code></pre>
+colour(Ten,Mis,Ala,Geo,Flo) :-
+    different(Ten,Mis),
+    different(Ten,Ala),
+    different(Ten,Geo),
+    different(Mis,Ala),
+    different(Ala,Geo),
+    different(Ala,Flo),
+    different(Geo,Flo).</code></pre>
                                             </div>
                                         </div>
                                     </section>
