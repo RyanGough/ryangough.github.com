@@ -6,55 +6,58 @@ I hereby claim:
 
   * I am an admin of http://ryanwgough.com
   * I am ryanwgough (https://keybase.io/ryanwgough) on keybase.
-  * I have a public key with fingerprint 76D7 9BF6 4DCC 47E5 FF68  8650 1246 5F3C 877B EED6
+  * I have a public key with fingerprint 56FD CBE0 2CC2 D5FE 4EAD  2FBF ECB4 D173 53AC 164C
 
-To claim this, I am signing this object:
+To do so, I am signing this object:
 
 {
-    "body": {
-        "key": {
-            "fingerprint": "76d79bf64dcc47e5ff68865012465f3c877beed6",
-            "host": "keybase.io",
-            "key_id": "12465f3c877beed6",
-            "uid": "12cebe64c1e92a6b91c6c146951c7d00",
-            "username": "ryanwgough"
-        },
-        "service": {
-            "hostname": "ryanwgough.com",
-            "protocol": "http:"
-        },
-        "type": "web_service_binding",
-        "version": 1
+  "body": {
+    "key": {
+      "eldest_kid": "01015b69da69f5323128fa90ddf89d2ab018c0ce940c5bd37eaf7560beda54c9a28a0a",
+      "fingerprint": "56fdcbe02cc2d5fe4ead2fbfecb4d17353ac164c",
+      "host": "keybase.io",
+      "key_id": "ecb4d17353ac164c",
+      "kid": "01015b69da69f5323128fa90ddf89d2ab018c0ce940c5bd37eaf7560beda54c9a28a0a",
+      "uid": "12cebe64c1e92a6b91c6c146951c7d00",
+      "username": "ryanwgough"
     },
-    "ctime": 1410987930,
-    "expire_in": 157680000,
-    "prev": "282e505162847f1b865f4d8ca5190cbf91f5c13b739df98049406eb390344b1c",
-    "seqno": 3,
-    "tag": "signature"
+    "service": {
+      "hostname": "ryanwgough.com",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1508787919,
+  "expire_in": 157680000,
+  "prev": "a61c285fd06b107713d6235921cc991bc15d3941eec814553f83fac58034bf78",
+  "seqno": 5,
+  "tag": "signature"
 }
 
-with the aforementioned key, yielding the PGP signature:
+which yields the signature:
 
 -----BEGIN PGP MESSAGE-----
-Version: Keybase OpenPGP v1.0.3
+Version: Keybase OpenPGP v2.0.76
 Comment: https://keybase.io/crypto
 
-yMHjAnicbZFdSBRRFMd3rdUUxXwwVNBkyghadO7uzJ0PCgqJpIesKDBp2Z25c2d3
-cN1ZZ2fX1q/QkoyikCJiy5dICNNAkGDbTDOpB0kLLaLICIogfAgrC/OjO2FPdV8u
-95zf/3/OuWc8Z50ty55b2F+7bXmx1z4x+j1qO1L4I9FMyboSp8Rmqg7/uVQt5MdG
-2NBCJiVSHFQ4QVYhoyDEcJhVVcjzkKWBi4Gs6kY8x8kYK5ByUgE9YimIjSxFcLmm
-kxh5eDWFRP/DR9cSCMsYMghgwSVBWQAIIsBAgQWIU2jaAiPYCEn1mNBGXAo1+vWo
-P0C1OikSj2kIW11bxf9hypFeT/RhQzd1pAdJLmCaYdGSmvGwxTZi2bvm4pW1kEJm
-J4IYNiKaHqJEQEhkapYtYAAt8Jzgpp0UPhHWDOzVLILlIE+TY5XBMWLp4l2YpVkA
-XTzDqUAmv6UyCo8kFgg0klUBqCwCbplzC4oq8DQjMDTEslug3QwjA0RZczWEdEp0
-kzYlP7GMaP6QZEYNTLWOjR5fb7Nn2dIdadb2bFmZG//ulM7OWOFSm9/8TInddV9H
-eo7t3nm+uGcT7I9fC16RimbOfLwZezhfXbolu6ri23gPaFr9kLgRHtTSu+KzB3Sx
-mL800vWyLpi5DAcOH3zc5R9ePeWopbJ/9R96NrB3u2NSe0EZFQVPS2r25b+639kw
-lJw5W1y2Yz9MTdvftp+b83WCvtJbZaOdj+p7S5teZ063PXln1kzu8fjay6JV9omY
-mWg6+aBN1PIv1H5KXi9JzlV2eBY38IvLwZQv0DF82pE3veLJbcn54inpHuqtdL4f
-ljo+5y0ssWbfrssFianqsQQ//7zldtrgnanZcBI3+pqX7l71XRzTFzKKtkaOipzn
-3m96yBTw
-=ZlEf
+yMIkAnicrZJZSFRRGMfHrHC0gagMg2y5EURInXPvPXeZhyKrae+hDCmM4Wx3vNXc
+O92ZcUnbqYgKJLBiAkmIemoxo4XK1AyiQImEkjaspxBbjEItoXOlnuqx83I43/n9
+/9/C1xHKDuRmXRiaCkjmen3Wk7ZMOrD5Y6SrRiIuq5bCNdJ2PnrxHYwnU9HtNpPC
+EoAAIqKZDGumhRRZgbJhYRMwZhkmkzEB0KCAclMFFBGm6BxbOtIA4QwjlZpYNjDA
+UpFk2U6MewnPdlLCFmkWo4QDmVKZIYurHDPZIhanRGVQV5CCKdRUKoTlbtJXiOII
+TvIFtiti4hEdLe8f/H+uOz1qB2XKCRcJIDdlrBETUo1CVTMRpDoDwAeT3HNwnAva
+q8ZOZcxNx8ql3UWSiFfYlPuj9Xv5i1lA3bjQJzw35VJ3h/grT6USYV+aqk74bCUn
+0d8uUWI7TIxSCCq4l7RdRwpDQdKU7dtCBAzd0E1oFkm8KmF7PGr7BNI1A4jjp+EV
+whJrkMoGshjQCAS6DhWmyQoyZUipaUJCIWKKqULOqQFVhBTLUCxMkQEUlVi6Ifl9
+7XRcKYxEmTgmLJN2zMGptMel3e2tZWMDWbmB8ePG+CsWyA1O/LN4wzdzAs8exue8
+aJ4x99hQyb3eZGJPZFube2zDodDNpmBtY092ffmU/pG+6S87Dhfsqz+65vkK0jUt
+9JjXnAue7GvvzK+b/Lrs3eVdvf2fvuYphU2ZnDuvugffzC6Q38/Ze6uhpmuL03+g
+Z/GyS63d07+cH1ofpyPfL+Z0L/mw91Bz+wTOotmDhQc7F/W2DDzC3o2ToeL3dfnL
+t7ZefVt6v/7x+LsNgYz08+zG/W9PVEWU3Lziwcg6a+W80g9Hng6MvT1SFxn+vOnn
+/NNrr/2IKcUlM9Ozi/ZsWdjyLdO6D945Hir4dmq4qe/BqoFNq+/FvYFJZyoStWUH
+xixtjARfng5/sWdNbph3Jaj/AoV0Sz0=
+=fqXs
 -----END PGP MESSAGE-----
 
 And finally, I am proving ownership of this host by posting or
