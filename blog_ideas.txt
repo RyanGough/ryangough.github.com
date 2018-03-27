@@ -1,8 +1,0 @@
-Ideas for blog posts:
-
-Small is beautiful, rectricting scope, smaller frameworks for less unforseen issues
-
-OO Design. Dependency inversions leading to coupling through abstractions. Beware "too general" abstractions.
-
-Why Erlang is ace. FP, the primacy of the process (function).
-
