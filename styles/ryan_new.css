@@ -1,0 +1,66 @@
+body {
+    height:100%;
+    font-family: 'Zilla Slab', sans-serif;
+    margin-left: 20px;
+}
+.text {
+    font-family: 'Lora', serif;
+}
+#name h1 {
+    font-family: 'Zilla Slab Highlight', serif;
+    font-size: 3em;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+#name h2 {
+    margin-bottom: 5px;
+    display: inline-block;
+}
+#name p {
+    margin-top: 5px;
+}
+#page {
+  margin: auto;
+  position: relative;
+  width: 75%;
+}
+ul {
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 0px;
+    margin-top: 30px;
+}
+li {
+    padding: 3px;
+    margin-top: 3px;
+}
+a {
+    margin-right: 5px;
+}
+.green {
+    background-color: lightgreen;
+}
+.yellow {
+    background-color: khaki;
+}
+.pink {
+    background-color: lightpink;
+}
+.blue {
+    background-color: lightblue;
+}
+.navbar {
+    padding: 5px;
+}
+.navbar a {
+    margin-right: 10px;
+}
+img { max-width: 100%; height: auto; }
+.center {
+  border: 2px solid blue;
+  margin: auto;
+  position: relative;
+  text-align: center;
+  top: 50%;
+  width: 20%;
+}

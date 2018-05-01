@@ -6,108 +6,90 @@
     <title>Ryan W Gough</title>
     <link href="https://fonts.googleapis.com/css?family=Zilla+Slab+Highlight:400,700&amp;subset=latin-ext" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Zilla Slab', sans-serif;
-            margin-left: 20px;
-        }
-        #name h1 {
-            font-family: 'Zilla Slab Highlight', serif;
-            font-size: 3em;
-            margin-bottom: 5px;
-            display: inline-block;
-        }
-        #name h2 {
-            margin-bottom: 5px;
-            display: inline-block;
-        }
-        #name p {
-            margin-top: 5px;
-        }
-        ul {
-            list-style-type: none;
-            margin-left: 0px;
-            padding-left: 0px;
-            margin-top: 30px;
-        }
-        li {
-            padding: 3px;
-            margin-top: 3px;
-        }
-        a {
-            margin-right: 5px;
-        }
-        a:link {
-            color: black;
-        }
-        a:visited {
-            color: black;
-        }
-        .green {
-            background-color: lightgreen;
-        }
-        .yellow {
-            background-color: khaki;
-        }
-        .pink {
-            background-color: lightpink;
-        }
-        .blue {
-            background-color: lightblue;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link href='./styles/ryan_new.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <div id="banner">
-        <div id="name">
-            <h1>Ryan W Gough</h1>
-            <h2>Software Developer.</h2>
-            <p>This is where I keep links to a few bits and bobs I have played with in my spare time.</p>
-        </div>
-    </div>
     <div id="page">
-        <ul>
-            <li>
-                <a href="https://twitter.com/ryanwgough" title="twitter-link">Twitter</a>
-                My twitter, mostly retweets of programming & lefty politics. Occasional biscuit ramblings.
-            </li>
-            <li>
-                <a href="https://github.com/ryangough" title="github-link">Github</a>
-                My Github. Half baked ideas, hacks and abandoned projects. Don't judge me dude.
-            </li>
-            <li class="yellow">
-                <a href="https://medium.com/@ryanwgough/design-thinking-c579ecaf9d72" title="design-thining-link">Design Thinking</a>
-                Blog post about how we think about software development.
-            </li>
-            <li class="pink">
-                <a href="https://github.com/RyanGough/reason.js" title="reason-js-link">Reason JS</a>
-                An attempt at a tiny kanren-style logic programming JS module.
-            </li>
-            <li class="green">
-                <a href="https://medium.com/@ryanwgough/reasons-to-hate-scrum-90d69790ab4b" title="hate-scrum-link">Scrum Hating</a>
-                Blog post about the reasons I dislike Scrum.
-            </li>
-            <li class="blue">
-                <a href="http://konekt4.com" title="konekt4-link">Konekt 4</a>
-                Play connect 4 online against random people. Sorta works. No-one ever does though...
-            </li>
-            <li class="yellow">
-                <a href="http://www.ryanwgough.com/gameoflife/index.html" title="game-of-life-link">Game Of Life</a>
-                A JavaScript implementation of Conway's game of life.
-            </li>
-            <li class="pink">
-                <a href="http://www.ryanwgough.com/out-of-the-tarpit/index.html" title="tarpit-link">Out Of The Tarpit</a>
-                A talk prepared for Manchester Barcamp about the paper "Out of the Tarpit"
-            </li>
-            <li class="green">
-                <a href="http://www.ryanwgough.com/D3StepByStep/index.html" title="d3-link">D3 Introduction</a>
-                Step-by-step intro to D3 prepared for Manc JS.
-            </li>
-            <li class="blue">
-                <a href="http://www.ryanwgough.com/blog/happy_numbers.html" title="happy-numbers-link">Happy Numbers</a>
-                An old blog post on the Happy Numbers problem and Erlang.
-            </li>
-        </ul>
+        <div id="banner">
+            <div id="name">
+                <h1>Ryan W Gough</h1>
+                <div class="navbar green">
+                    <a href="http://www.ryanwgough.com/index.html" title="blog-link">Blog</a>
+                    <a href="http://www.ryanwgough.com/links.html" title="link-link">Other Stuff</a>
+                    <a href="http://twitter.com" title="twitter-link">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <ul>
+                <div class=blog-post>
+                    <p class=date> Fri 27 Apr 2018 21:36:13 BST</p>
+                    <h2>We need to talk about abstractions</h2>
+                    <img src="./images/escher-metamorphose.jpg"/>
+                    <p class=text>
+                    Abstraction is a word that is used a lot in software development discourse, but I sometimes think that we might not all be talking about the same thing when we use it.
+                    I first noticed this when I saw a <a href="http://www.ryanwgough.com/blog/communication.html">slide from a talk</a> that said something along the lines of</p>
+                    <blockquote>"Rules of abstraction. 1, don't use abstraction, 2 don't use abstraction, 3, don't use abstraction."</blockquote>
+                    <p class="text">I still kind of wonder what that person's code looks like. 
+                    Recently I've also seen quite a lot of warnings about premature abstraction. These are usually made by super smart people who I am sure are better developers than me, but
+                    something about this viewpoint slightly vexes me. This blog post is basically me trying to explain why.
+                    </p>
+                    <p class=text>
+                    Let's start with what I think abstraction means, because this is kind of important. Dictionary definitions vary a bit but the common theme is of developing general ideas from
+                    specific examples. I like to think about abstractions as the distillation of an idea. Boiling off the extraneous details and condensing out the purer, more general essence. 
+                    <a href="https://en.wikipedia.org/wiki/All_models_are_wrong">All models are abstractions</a> by necessity - a non abstract model of a thing would just be the thing itelf - and given that software development is, to a large degree,
+                    the practice of creating models then it's easy to see how central the concept of abstraction is to programming. Which makes "don't use abstraction" a fairly baffling
+                    rule of thumb for a software developer.
+                    </p>
+                    <p class=text>
+                    It's probably worth looking at some specific examples of abstraction in a software development context. Let's imagine we are writing a todo list application. Its going to have
+                    a RESTful web API, we're going to use a <a href="http://alistair.cockburn.us/Hexagonal+architecture">ports and adapters</a> approach to separate our core domain logic from how 
+                    we interact with it, and the first route we are going to implement is going to be a POST to /todos which creates a new Todo with a title and a description, and saves it by writing 
+                    it to a file. Clearly we're using a bunch of abstractions in this example. We're got the concept of <em>a todo</em>, which has a title and description and has a method to save it. 
+                    This is an example of an abstraction in the model of our domain and these are probably the most important kind of abstractions that we create as they are core to how our application 
+                    will work. We're using a <em>file</em> to store the todo, which is an operating system abstraction that keeps us from having to worry about some of the messier details of physically 
+                    writing data to a disk. This is an example of how software development relies on layers of abstraction, that make life easier for the people trying to solve problems in the layer above. 
+                    Finally, we will likely be implementing an <em>adapter</em> abstraction to map a http request (probably in some representation dictated by a HTTP framework) to a representation defined 
+                    in our core domain model. We might call this an "architectural abstraction" to distinguish it from the domain abstraction relating to todo concepts themselves. 
+                    You can probably identify a ton of other abstractions at this point but those will do for now.
+                    </p>
+                    <p class=text>
+                    We can see in that small example that there are different types of abstractions and they help us in a number of ways. From an implementation point of view, they enable us to
+                    reuse code, and avoid rewriting lots of boilerplate for very similar situations. I feel like warnings about abstraction focus on this aspect, because 
+                    <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRYing</a> something up can sometimes lead to unwanted coupling in our code for example. 
+                    Perhaps the more important use of abstraction though is it gives us a way to think about the design of our system.
+                    To me, abstractions feel like the compositional units of design in the same way that classes or modules etc. are the compositional units of the implementation. To me it seems
+                    pretty hard to separate the act of creating abstractions from the act of design, but more on that later.
+                    </p>
+                    <p class=text>
+                    So, back to the question of premature abstraction then. Would it be better to have started implementing that initial feature of the app without attempting to identify the likely
+                    abstractions that will be used? One school of thought says yes, because I might not need those abstractions, maybe I need different ones, or maybe I don't need any at all, and
+                    it's best to let the tests drive these things out.
+                    </p>
+                    <p class=text>
+                    I feel though that thinking about the likely abstractions ahead of time is actually a big benefit. It allows me to get feedback on the design straight away, without waiting
+                    for me to write any code. I can discuss the abstractions with people and play out scenarios, and get everybody on the team quickly on the same page with regards the basic design.
+                    There is also the question as to whether I would be able to TDD my way to better abstractions. A lot of the value in abstractions is in their general nature, so thinking about
+                    them before being exposed to specific problems might help me to not get too bogged down assuming my application is a special snowflake with problems that have never been seen before. 
+                    And I do think that a developer who can purely TDD their way to a good design is probably leveraging their design ability, rather than being led to a neat solution by the process.
+                    On the other hand, a developer that doesn't have the same feel for design might be better off thinking this stuff through first before diving into
+                    the code.
+                    </p>
+                    <p class=text>
+                    OK, so there were possibly some straw men in there. Of course you would hope that a developer without enough understanding of design would not be abandoned to TDD on their own without
+                    assistance. And although TDD discourse does talk about listening to the tests, there is nothing that says you can't also do some design thinking up front, and I imagine most
+                    developers would encourage this, so long as its not the dreaded "big design up front". But on the other hand, there is also nothing that says that people who think about 
+                    abstractions up front are not allowed to change their mind if the tests are telling them to. So perhaps the difference in viewpoints that I detect is more a difference in 
+                    emphasis. Despite this, it does feel like to some extent the design / thinking baby has been thrown out with the BDUF bathwater and that we could be in danger of incubating 
+                    a "fear of abstraction" that manifests as a whole bunch of ugly, imperative scripts that are hard to read and harder to think about.
+                    </p>
+                    <p class=blog-footer>
+                    I'm going to stop there, feel free to send me a twoot about this if you like - <a href="https://twitter.com/ryanwgough">ryanwgough</a>
+                    </p>
+                </div>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
